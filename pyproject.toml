@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "documentconverter"
+version = "1.0.0"
+description = "A document conversion tool"
+authors = [{name = "DocumentConverter Team"}]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "click>=8.0.0",
+    "rich>=10.0.0",
+    "pdfplumber>=0.7.0",
+    "python-docx>=0.8.11",
+    "markdown>=3.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+
+[project.scripts]
+documentconverter = "src.main:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short" 
