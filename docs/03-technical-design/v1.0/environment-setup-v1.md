@@ -97,11 +97,6 @@ python-docx>=0.8.11
 # Markdown 处理
 markdown>=3.3.0
 markdownify>=0.11.0
-
-# 开发工具
-pytest>=7.0.0
-black>=23.0.0
-flake8>=6.0.0
 ```
 
 #### 开发依赖
@@ -116,6 +111,10 @@ pytest-cov>=4.0.0
 black>=23.0.0
 flake8>=6.0.0
 mypy>=1.0.0
+
+# 类型存根
+types-Markdown>=0.1.0
+types-flake8>=7.0.0
 
 # 文档工具
 sphinx>=7.0.0
@@ -173,230 +172,92 @@ DocumentConverter/
 
 #### 第一步：基础环境检查
 
-- [ ] 检查 Python 版本（3.12+）
-- [ ] 检查 Git 版本
-- [ ] 检查 VSCode 安装
+- [x] 检查 Python 版本（3.12+）
+- [x] 检查 Git 版本
+- [x] 检查 VSCode 安装
 
 #### 第二步：项目结构创建
 
-- [ ] 创建项目目录结构
-- [ ] 创建虚拟环境
-- [ ] 安装基础依赖
+- [x] 创建项目目录结构
+- [x] 创建虚拟环境
+- [x] 安装基础依赖
 
 #### 第三步：开发工具配置
 
-- [ ] 配置 VSCode 设置
-- [ ] 安装 VSCode 插件
-- [ ] 配置代码格式化
+- [x] 配置 VSCode 设置
+- [x] 安装 VSCode 插件
+- [x] 配置代码格式化
 
 #### 第四步：测试环境验证
 
-- [ ] 运行基础测试
-- [ ] 验证环境功能
-- [ ] 检查代码质量工具
+- [x] 运行基础测试
+- [x] 验证环境功能
+- [x] 检查代码质量工具
 
 ### 4.2 自动化脚本设计
 
-#### 环境搭建脚本
+#### 环境搭建脚本 (`scripts/setup_env.sh`)
 
-```bash
-#!/bin/bash
-# scripts/setup_env.sh
+**作用目的**：自动化环境搭建过程，确保所有开发者使用相同的环境配置。
 
-echo "🚀 开始搭建 DocumentConverter 开发环境..."
+**关键功能**：
 
-# 1. 检查 Python 版本
-echo "📋 检查 Python 版本..."
-python_version=$(python3 --version 2>&1 | grep -o '3\.[0-9]\+')
-if [[ "$python_version" < "3.12" ]]; then
-    echo "❌ Python 版本过低，需要 3.12+"
-    exit 1
-fi
-echo "✅ Python 版本检查通过: $(python3 --version)"
+- Python 版本检查（3.12+）
+- 虚拟环境创建和依赖安装
+- 项目目录结构创建
+- VSCode 配置自动生成
+- `pyproject.toml` 配置文件创建
 
-# 2. 创建虚拟环境
-echo "📦 创建虚拟环境..."
-python3 -m venv venv
-source venv/bin/activate
+**关键设置**：
 
-# 3. 升级 pip
-echo "⬆️ 升级 pip..."
-pip install --upgrade pip
+- 使用现代 VSCode 配置格式（`[python]` 部分）
+- 设置 Black 格式化器和 88 字符标尺
+- 配置 pytest 测试框架
+- 添加类型存根依赖支持
 
-# 4. 安装依赖
-echo "📚 安装项目依赖..."
-pip install -r requirements.txt
-pip install -r requirements-dev.txt
+#### 测试运行脚本 (`scripts/run_tests.sh`)
 
-# 5. 创建项目目录结构
-echo "📁 创建项目目录结构..."
-mkdir -p src/{cli,core,utils}
-mkdir -p tests/data
-mkdir -p scripts
-mkdir -p .vscode
+**作用目的**：统一测试执行流程，包含单元测试和代码质量检查。
 
-# 6. 创建基础文件
-echo "📄 创建基础文件..."
-touch src/__init__.py
-touch src/cli/__init__.py
-touch src/core/__init__.py
-touch src/utils/__init__.py
-touch tests/__init__.py
+**关键功能**：
 
-# 7. 配置 VSCode
-echo "⚙️ 配置 VSCode..."
-cat > .vscode/settings.json << EOF
-{
-    "python.defaultInterpreterPath": "./venv/bin/python",
-    "python.formatting.provider": "black",
-    "python.linting.enabled": true,
-    "python.linting.flake8Enabled": true,
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": true
-    }
-}
-EOF
-
-cat > .vscode/extensions.json << EOF
-{
-    "recommendations": [
-        "ms-python.python",
-        "ms-python.black-formatter",
-        "ms-python.flake8",
-        "ms-python.mypy-type-checker"
-    ]
-}
-EOF
-
-echo "✅ 环境搭建完成！"
-echo "📝 使用说明："
-echo "   1. 激活虚拟环境: source venv/bin/activate"
-echo "   2. 运行测试: python -m pytest"
-echo "   3. 格式化代码: black src/"
-echo "   4. 检查代码: flake8 src/"
-```
-
-#### 测试运行脚本
-
-```bash
-#!/bin/bash
-# scripts/run_tests.sh
-
-echo "🧪 运行测试套件..."
-
-# 激活虚拟环境
-source venv/bin/activate
-
-# 运行测试
-echo "📋 运行单元测试..."
-python -m pytest tests/ -v
-
-# 运行代码质量检查
-echo "🔍 运行代码质量检查..."
-black --check src/
-flake8 src/
-
-echo "✅ 测试完成！"
-```
+- 激活虚拟环境
+- 运行 pytest 单元测试
+- 执行 Black 格式检查
+- 运行 Flake8 代码质量检查
 
 ### 4.3 配置文件设计
 
 #### pyproject.toml
 
-```toml
-[build-system]
-requires = ["setuptools>=61.0", "wheel"]
-build-backend = "setuptools.build_meta"
+**作用目的**：现代 Python 项目的标准配置文件，定义项目元数据、依赖管理和工具配置。
 
-[project]
-name = "documentconverter"
-version = "1.0.0"
-description = "A document conversion tool"
-authors = [{name = "DocumentConverter Team"}]
-readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "click>=8.0.0",
-    "rich>=10.0.0",
-    "pdfplumber>=0.7.0",
-    "python-docx>=0.8.11",
-    "markdown>=3.3.0",
-]
+**关键配置**：
 
-[project.optional-dependencies]
-dev = [
-    "pytest>=7.0.0",
-    "pytest-cov>=4.0.0",
-    "black>=23.0.0",
-    "flake8>=6.0.0",
-    "mypy>=1.0.0",
-]
+- **项目信息**：名称、版本、描述、作者
+- **依赖管理**：核心依赖和开发依赖分离
+- **工具配置**：Black（88字符）、Flake8、Pytest 设置
+- **入口点**：`documentconverter` 命令行工具
 
-[project.scripts]
-documentconverter = "src.main:main"
+**重要设置**：
 
-[tool.black]
-line-length = 88
-target-version = ['py312']
-
-[tool.flake8]
-max-line-length = 88
-extend-ignore = ["E203", "W503"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
-addopts = "-v --tb=short"
-```
+- Python 版本要求：`>=3.12`
+- 代码格式化：Black 88字符行长
+- 测试框架：Pytest 配置
+- 类型检查：支持 mypy 和类型存根
 
 #### setup.py
 
-```python
-from setuptools import setup, find_packages
+**作用目的**：传统的 Python 包安装配置，提供向后兼容性。
 
-setup(
-    name="documentconverter",
-    version="1.0.0",
-    packages=find_packages(where="src"),
-    package_dir={"": "src"},
-    install_requires=[
-        "click>=8.0.0",
-        "rich>=10.0.0",
-        "pdfplumber>=0.7.0",
-        "python-docx>=0.8.11",
-        "markdown>=3.3.0",
-    ],
-    extras_require={
-        "dev": [
-            "pytest>=7.0.0",
-            "pytest-cov>=4.0.0",
-            "black>=23.0.0",
-            "flake8>=6.0.0",
-            "mypy>=1.0.0",
-        ],
-    },
-    entry_points={
-        "console_scripts": [
-            "documentconverter=main:main",
-        ],
-    },
-    python_requires=">=3.12",
-    author="DocumentConverter Team",
-    description="A document conversion tool",
-    long_description=open("README.md").read(),
-    long_description_content_type="text/markdown",
-    classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.12",
-    ],
-)
-```
+**关键配置**：
+
+- 包发现和目录结构
+- 依赖管理（与 pyproject.toml 保持一致）
+- 命令行入口点定义
+- 项目元数据和分类信息
+
+> **注意**：现代项目优先使用 `pyproject.toml`，`setup.py` 主要用于向后兼容。
 
 ## 5. 风险评估
 
