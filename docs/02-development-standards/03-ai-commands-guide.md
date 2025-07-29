@@ -14,14 +14,14 @@
 # 查看项目结构
 list_dir
 
-# 查看当前任务
-read_file docs/04-project-management/task-list.md
-
 # 查看产品需求
 read_file docs/01-product-requirements/prd.md
 
-# 查看项目计划
-read_file docs/04-project-management/project-plan.md
+# 查看技术架构设计
+read_file docs/03-technical-design/architecture.md
+
+# 查看当前任务
+read_file docs/04-project-management/task-list.md
 ```
 
 ### 2.2 代码结构了解
@@ -158,8 +158,6 @@ run_terminal_cmd time python src/main.py word2md test.docx test.md
 
 ```bash
 # 1. 推送所有内容到远程
-run_terminal_cmd git add .
-run_terminal_cmd git commit -m "feat: 完成阶段里程碑"
 run_terminal_cmd git push origin feature/current-branch
 
 # 2. 检查当前分支名称
@@ -168,17 +166,17 @@ run_terminal_cmd git branch --show-current
 # 3. 切换到 develop 分支
 run_terminal_cmd git checkout develop
 
-# 4. 从远程拉取最新代码
+# 4. 从远程拉取最新代码并合并功能分支
 run_terminal_cmd git pull origin develop
+run_terminal_cmd git merge feature/current-branch --no-ff -m "feat: 合并功能分支到develop"
+# 如果有冲突，解决后继续；如果没有冲突，直接合并
 
-# 5. 从本地分支做 diff 合并（安全备份）
-run_terminal_cmd git diff develop..feature/current-branch > milestone_backup.patch
-
-# 6. 删除功能分支
+# 5. 删除功能分支并清理远程分支缓存
 run_terminal_cmd git branch -d feature/current-branch
-
-# 7. 更新远程分支缓存
 run_terminal_cmd git fetch --prune
+
+# 可选：如果需要备份，在合并前执行
+# run_terminal_cmd git diff develop..feature/current-branch > milestone_backup.patch
 ```
 
 ### 5.2 新里程碑开始流程
