@@ -41,17 +41,81 @@ touch src/core/__init__.py
 touch src/utils/__init__.py
 touch tests/__init__.py
 
+# 创建 pyproject.toml
+cat > pyproject.toml << EOF
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "documentconverter"
+version = "1.0.0"
+description = "A document conversion tool"
+authors = [{name = "DocumentConverter Team"}]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "click>=8.0.0",
+    "rich>=10.0.0",
+    "pdfplumber>=0.7.0",
+    "python-docx>=0.8.11",
+    "markdown>=3.3.0",
+    "markdownify>=0.11.0",
+    "PyPDF2>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "types-Markdown>=0.1.0",
+    "types-flake8>=7.0.0",
+]
+
+[project.scripts]
+documentconverter = "src.cli.main:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+EOF
+
 # 7. 配置 VSCode
 echo "⚙️ 配置 VSCode..."
 cat > .vscode/settings.json << EOF
 {
     "python.defaultInterpreterPath": "./venv/bin/python",
-    "python.formatting.provider": "black",
-    "python.linting.enabled": true,
-    "python.linting.flake8Enabled": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.rulers": [88]
+    },
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-        "source.organizeImports": true
+        "source.organizeImports": "explicit"
+    },
+    "python.testing.pytestEnabled": true,
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/venv": true,
+        "**/.pytest_cache": true
     }
 }
 EOF
