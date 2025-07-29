@@ -14,8 +14,8 @@ def test_required_packages():
     """测试必需包的导入"""
     import click
     import docx
-    import markdown
-    import markdownify
+    import markdown  # type: ignore
+    import markdownify  # type: ignore
     import pdfplumber
     import PyPDF2
     import rich
@@ -34,7 +34,7 @@ def test_required_packages():
 def test_dev_packages():
     """测试开发包的导入"""
     import black
-    import flake8
+    import flake8  # type: ignore
     import pytest
 
     # 验证开发包已正确安装（只检查可以导入的包）
