@@ -208,7 +208,7 @@ run_terminal_cmd mkdir -p docs/03-technical-design/v1.0
 
 # 7. 按照文档格式规范创建技术设计文档
 edit_file docs/03-technical-design/v1.0/mvp-design.md
-# 使用 docs/02-development-standards/02-documentation-format.md 中的模板
+# 使用 docs/02-development-standards/02-doc-format-guide.md 中的模板
 # 确保包含：文档目标、设计概述、详细设计、实现计划、风险评估、核心要点
 
 # 8. 创建模块设计文档
@@ -268,7 +268,7 @@ run_terminal_cmd mkdir -p docs/03-technical-design/v1.0
 
 # 3. 按照文档格式规范创建技术设计文档
 edit_file docs/03-technical-design/v1.0/mvp-design.md
-# 使用 docs/02-development-standards/02-documentation-format.md 中的模板
+# 使用 docs/02-development-standards/02-doc-format-guide.md 中的模板
 # 确保包含：文档目标、设计概述、详细设计、实现计划、风险评估、核心要点
 
 # 4. 创建模块设计文档
@@ -346,7 +346,7 @@ read_file docs/04-project-management/task-list.md
 read_file docs/03-technical-design/architecture.md
 
 # 2. 检查文档格式规范
-read_file docs/02-development-standards/02-documentation-format.md
+read_file docs/02-development-standards/02-doc-format-guide.md
 
 # 3. 创建文档时确保包含以下要素：
 # - 文档目标：明确文档目的和适用范围

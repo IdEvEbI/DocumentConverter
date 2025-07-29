@@ -18,8 +18,8 @@
 
 ```bash
 01-collaboration-guide.md    # 协作规范（最高优先级）
-02-documentation-format.md   # 文档格式规范
-03-ai-commands.md            # AI 指令集
+02-doc-format-guide.md       # 文档格式规范
+03-ai-commands-guide.md      # AI 指令集
 ```
 
 ### 2.2 目录结构规范
