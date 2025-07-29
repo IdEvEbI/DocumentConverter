@@ -1,0 +1,12 @@
+# 测试框架
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# 代码质量
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.0.0
+
+# 文档工具
+sphinx>=7.0.0
+sphinx-rtd-theme>=1.0.0 
