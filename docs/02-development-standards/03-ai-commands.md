@@ -199,17 +199,34 @@ read_file docs/03-technical-design/architecture.md
 # 4. 创建新功能分支
 run_terminal_cmd git checkout -b feature/new-milestone
 
-# 5. 编写技术设计文档并等待确认
-edit_file docs/03-technical-design/new-feature-design.md
-# 等待用户确认技术设计文档
+# 5. 确定里程碑版本和文档类型
+# 根据当前开发阶段确定版本（v1.0、v2.0、v3.0）
+# 根据功能类型确定文档名称（parser、converter、cli、testing等）
 
-# 6. 更新任务清单明细
+# 6. 创建版本化文档目录
+run_terminal_cmd mkdir -p docs/03-technical-design/v1.0
+
+# 7. 按照文档格式规范创建技术设计文档
+edit_file docs/03-technical-design/v1.0/mvp-design.md
+# 使用 docs/02-development-standards/02-documentation-format.md 中的模板
+# 确保包含：文档目标、设计概述、详细设计、实现计划、风险评估、核心要点
+
+# 8. 创建模块设计文档
+edit_file docs/03-technical-design/v1.0/parser-v1.md
+edit_file docs/03-technical-design/v1.0/converter-v1.md
+edit_file docs/03-technical-design/v1.0/cli-v1.md
+edit_file docs/03-technical-design/v1.0/testing-v1.md
+
+# 9. 更新主架构文档
+edit_file docs/03-technical-design/architecture.md
+
+# 10. 更新任务清单明细
 edit_file docs/04-project-management/task-list.md
 # 根据技术设计文档更新具体任务
 
-# 7. 提交技术设计文档
-run_terminal_cmd git add docs/03-technical-design/new-feature-design.md
-run_terminal_cmd git commit -m "docs: 添加新里程碑技术设计文档"
+# 11. 提交技术设计文档
+run_terminal_cmd git add docs/03-technical-design/
+run_terminal_cmd git commit -m "docs: 添加 v1.0 里程碑技术设计文档"
 run_terminal_cmd git push origin feature/new-milestone
 
 # 8. 激活虚拟环境
@@ -236,12 +253,127 @@ run_terminal_cmd git status
 run_terminal_cmd git log --oneline -10
 ```
 
-## 6. 核心要点
+## 6. 文档管理操作
+
+### 6.1 文档创建流程
+
+```bash
+# 新里程碑开始时的文档创建流程
+# 1. 确定里程碑版本和文档类型
+# 根据当前开发阶段确定版本（v1.0、v2.0、v3.0）
+# 根据功能类型确定文档名称（parser、converter、cli、testing等）
+
+# 2. 创建版本化文档目录
+run_terminal_cmd mkdir -p docs/03-technical-design/v1.0
+
+# 3. 按照文档格式规范创建技术设计文档
+edit_file docs/03-technical-design/v1.0/mvp-design.md
+# 使用 docs/02-development-standards/02-documentation-format.md 中的模板
+# 确保包含：文档目标、设计概述、详细设计、实现计划、风险评估、核心要点
+
+# 4. 创建模块设计文档
+edit_file docs/03-technical-design/v1.0/parser-v1.md
+edit_file docs/03-technical-design/v1.0/converter-v1.md
+edit_file docs/03-technical-design/v1.0/cli-v1.md
+edit_file docs/03-technical-design/v1.0/testing-v1.md
+
+# 5. 更新主架构文档
+edit_file docs/03-technical-design/architecture.md
+
+# 6. 执行文档质量检查
+# 检查文档结构完整性、内容准确性、可维护性
+grep_search "TODO" include_pattern="docs/03-technical-design/v1.0/*.md"
+```
+
+### 6.2 文档同步机制
+
+```bash
+# 代码变更时的文档同步
+# 1. 代码变更
+edit_file src/core/parser.py
+
+# 2. 更新相关文档
+edit_file docs/03-technical-design/v1.0/parser-v1.md
+
+# 3. 更新主架构文档
+edit_file docs/03-technical-design/architecture.md
+
+# 4. 提交文档变更
+run_terminal_cmd git add docs/
+run_terminal_cmd git commit -m "docs: 更新解析器设计文档"
+```
+
+### 6.3 版本化文档管理
+
+```bash
+# 版本升级时的文档管理
+# 1. 创建新版本目录
+run_terminal_cmd mkdir -p docs/03-technical-design/v2.0
+
+# 2. 复制并升级相关文档
+run_terminal_cmd cp docs/03-technical-design/v1.0/parser-v1.md docs/03-technical-design/v2.0/parser-v2.md
+
+# 3. 更新版本信息
+edit_file docs/03-technical-design/v2.0/parser-v2.md
+
+# 4. 更新主架构文档
+edit_file docs/03-technical-design/architecture.md
+```
+
+### 6.4 文档质量检查
+
+```bash
+# 定期文档审查
+# 1. 检查文档完整性
+grep_search "TODO" include_pattern="docs/**/*.md"
+
+# 2. 检查文档一致性
+grep_search "v1.0" include_pattern="docs/**/*.md"
+
+# 3. 检查文档结构
+list_dir docs/03-technical-design/
+
+# 4. 更新文档状态
+edit_file docs/03-technical-design/architecture.md
+```
+
+### 6.5 里程碑文档创建质量保证
+
+```bash
+# 新里程碑文档创建前的质量保证流程
+# 1. 确认里程碑版本和文档类型
+read_file docs/04-project-management/task-list.md
+read_file docs/03-technical-design/architecture.md
+
+# 2. 检查文档格式规范
+read_file docs/02-development-standards/02-documentation-format.md
+
+# 3. 创建文档时确保包含以下要素：
+# - 文档目标：明确文档目的和适用范围
+# - 版本信息：文档版本、最后更新、更新内容
+# - 设计概述：设计目标、设计原则、技术选型
+# - 详细设计：架构设计、接口设计、数据流设计
+# - 实现计划：开发阶段、测试策略、部署计划
+# - 风险评估：技术风险、缓解措施
+# - 核心要点：一句话总结
+
+# 4. 文档创建后的质量检查
+# - 结构完整性：总分总结构，标题数量控制
+# - 内容准确性：技术选型合理，设计原则明确
+# - 可维护性：格式标准一致，版本控制清晰
+
+# 5. 提交前最终检查
+run_terminal_cmd git diff docs/03-technical-design/
+# 确认文档变更符合预期
+```
+
+## 7. 核心要点
 
 - **信息获取**：项目背景、代码结构、文档内容快速了解
 - **环境管理**：虚拟环境、依赖安装、环境检查标准化操作
 - **质量保证**：测试执行、代码检查、性能测试完整链路
 - **流程管理**：里程碑完成、新阶段开始、分支状态检查
+- **文档管理**：文档创建、同步、版本化、质量检查标准化操作
 - **协作效率**：标准化的 AI 指令集，实现快速操作和高效协作
 
 > **一句话总结**：通过标准化的 AI 指令集，实现项目开发的快速操作和高效协作。
