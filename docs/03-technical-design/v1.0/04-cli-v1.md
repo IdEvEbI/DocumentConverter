@@ -178,7 +178,7 @@ def show_progress(total_files: int):
             progress.update(task, advance=1)
 ```
 
-#### 错误处理
+#### 统一错误处理
 
 ```python
 def handle_error(error: Exception, context: str):
@@ -338,7 +338,7 @@ def detect_format(file_path: str) -> str:
 - **风险**：参数过多可能导致使用复杂
 - **缓解措施**：保持参数简洁，提供合理的默认值
 
-#### 错误处理
+#### 错误处理策略
 
 - **风险**：错误信息可能不够清晰
 - **缓解措施**：实现统一的错误处理和用户友好的错误信息
