@@ -2,15 +2,15 @@
 
 ## 1. 文档目标
 
-本文档定义 DocumentConverter 项目 v1.0 MVP 版本的技术设计，基于 PRD 需求设计简洁高效的文档转换系统，实现快速迭代和核心功能验证。
+本文档定义 DocumentConverter 项目 v1.0 MVP 版本的整体设计，作为 v1.0 系列文档的入口和总览。
 
-> **适用范围**：Python 项目开发，文档转换工具，MVP 快速迭代场景。
+> **适用范围**：Python 项目开发，MVP 快速迭代场景。
 
 ---
 
 **文档版本**：v1.0  
-**最后更新**：2025-07-29  
-**更新内容**：创建 MVP 设计文档，定义核心功能和开发边界
+**最后更新**：2025-07-30  
+**更新内容**：精简内容，专注 MVP 整体设计，删除重复内容
 
 ## 2. 设计概述
 
@@ -32,30 +32,15 @@
 
 ### 2.3 技术选型
 
-#### PDF 处理
+#### 核心技术栈
 
-- **pdfplumber**：PDF 内容解析（表格、文本、图片）
-- **PyPDF2**：备用 PDF 文本提取
+- **PDF 处理**：pdfplumber + pypdf
+- **Word 处理**：python-docx
+- **Markdown 处理**：markdown + markdownify
+- **CLI 框架**：click + rich
+- **开发工具**：pytest + black + flake8
 
-#### Word 文档处理
-
-- **python-docx**：Word 文档读写
-
-#### Markdown 处理
-
-- **markdown**：Markdown 解析和渲染
-- **markdownify**：HTML 转 Markdown
-
-#### CLI 框架
-
-- **click**：命令行界面框架
-- **rich**：终端美化输出
-
-#### 开发工具
-
-- **pytest**：测试框架（TDD 驱动）
-- **black**：代码格式化
-- **flake8**：代码检查
+> 详细技术选型请参考：02-environment-setup-v1.md
 
 ## 3. 详细设计
 
@@ -99,6 +84,8 @@ documentconverter batch <input_dir> <output_dir> [options]
 --verbose, -v: 详细输出
 --quiet, -q: 静默模式
 ```
+
+> 详细 CLI 设计请参考：04-cli-v1.md
 
 ### 3.3 数据流设计
 

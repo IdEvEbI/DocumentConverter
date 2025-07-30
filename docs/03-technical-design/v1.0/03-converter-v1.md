@@ -2,15 +2,15 @@
 
 ## 1. 文档目标
 
-本文档定义 DocumentConverter 项目 v1.0 MVP 版本的转换器模块设计，实现文档格式转换的核心功能。
+本文档定义 DocumentConverter 项目 v1.0 MVP 版本的转换器模块设计，专注文档格式转换的核心逻辑。
 
-> **适用范围**：Python 项目开发，文档转换功能，MVP 快速迭代场景。
+> **适用范围**：Python 项目开发，文档转换功能。
 
 ---
 
 **文档版本**：v1.0  
-**最后更新**：2025-07-29  
-**更新内容**：创建转换器设计文档，定义核心转换功能和数据流
+**最后更新**：2025-07-30  
+**更新内容**：精简内容，专注转换逻辑，删除重复内容
 
 ## 2. 设计概述
 
@@ -33,19 +33,13 @@
 
 ### 2.3 技术选型
 
-#### PDF 转换
+#### 转换技术栈
 
-- **pdfplumber**：PDF 内容解析和表格提取
-- **PyPDF2**：备用文本提取
+- **PDF 转换**：pdfplumber + pypdf
+- **Word 转换**：python-docx
+- **Markdown 转换**：markdown + markdownify
 
-#### Word 转换
-
-- **python-docx**：Word 文档读写和格式处理
-
-#### Markdown 转换
-
-- **markdown**：Markdown 解析和渲染
-- **markdownify**：HTML 转 Markdown
+> 详细技术选型请参考：01-mvp-design.md
 
 ## 3. 详细设计
 
