@@ -85,7 +85,7 @@ documentconverter batch <input_dir> <output_dir> [options]
 --quiet, -q: 静默模式
 ```
 
-> 详细 CLI 设计请参考：04-cli-v1.md
+> 详细 CLI 设计请参考：03-cli-v1.md
 
 ### 3.3 数据流设计
 
