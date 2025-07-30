@@ -4,7 +4,6 @@ DocumentConverter 命令行主模块
 提供命令行接口和用户交互功能。
 """
 
-import os
 import sys
 
 import click

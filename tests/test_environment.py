@@ -17,7 +17,7 @@ def test_required_packages():
     import markdown  # type: ignore
     import markdownify  # type: ignore
     import pdfplumber
-    import PyPDF2
+    import pypdf
     import rich
 
     # 验证包已正确安装（只检查可以导入的包）
@@ -25,7 +25,7 @@ def test_required_packages():
     assert click is not None
     assert rich is not None
     assert pdfplumber is not None
-    assert PyPDF2 is not None
+    assert pypdf is not None
     assert docx is not None
     assert markdown is not None
     assert markdownify is not None
