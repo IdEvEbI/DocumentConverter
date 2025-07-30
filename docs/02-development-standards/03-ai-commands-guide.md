@@ -8,7 +8,7 @@
 
 ## 2. 项目信息获取
 
-### 2.1 项目背景了解
+### 2.1 了解项目背景
 
 ```bash
 # 查看项目结构
@@ -19,6 +19,12 @@ read_file docs/01-product-requirements/prd.md
 
 # 查看技术架构设计
 read_file docs/03-technical-design/architecture.md
+
+# 查看开发者与 AI 助手的协作规范
+read_file docs/02-development-standards/01-collaboration-guide.md
+
+# 查看文档格式规范
+read_file docs/02-development-standards/02-doc-format-guide.md
 
 # 查看当前任务
 read_file docs/04-project-management/task-list.md
