@@ -1,0 +1,19 @@
+# CLI 框架
+click>=8.0.0
+rich>=10.0.0
+
+# PDF 处理
+pdfplumber>=0.7.0
+pypdf>=4.0.0
+
+# Word 处理
+python-docx>=0.8.11
+
+# Markdown 处理
+markdown>=3.3.0
+markdownify>=0.11.0
+
+# 开发工具
+pytest>=7.0.0
+black>=23.0.0
+flake8>=6.0.0 
